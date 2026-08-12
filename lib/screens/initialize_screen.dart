@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -62,9 +60,13 @@ class _InitializeScreenState extends State<InitializeScreen> {
           ),
         );
       } else {
+        final message = result['message']?.toString().trim();
+        final displayMessage = (message == null || message.isEmpty)
+            ? 'SDK initialization failed'
+            : message;
         _showAlert(
-          'SDK Init Result',
-          const JsonEncoder.withIndent('  ').convert(result),
+          'SDK Init Error',
+          '$displayMessage\ncode: $code',
         );
       }
     } on PlatformException catch (e) {
@@ -83,12 +85,23 @@ class _InitializeScreenState extends State<InitializeScreen> {
     showDialog<void>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(title),
-        content: SingleChildScrollView(child: Text(message)),
+        title: Text(
+          title,
+          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+        ),
+        content: SingleChildScrollView(
+          child: Text(
+            message,
+            style: const TextStyle(fontSize: 16),
+          ),
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('OK'),
+            child: const Text(
+              'OK',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            ),
           ),
         ],
       ),

@@ -177,12 +177,23 @@ class _InspectionScreenState extends State<InspectionScreen> {
     showDialog<void>(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(title),
-        content: SingleChildScrollView(child: Text(message)),
+        title: Text(
+          title,
+          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+        ),
+        content: SingleChildScrollView(
+          child: Text(
+            message,
+            style: const TextStyle(fontSize: 16),
+          ),
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: const Text('OK'),
+            child: const Text(
+              'OK',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            ),
           ),
         ],
       ),
@@ -209,7 +220,7 @@ class _InspectionScreenState extends State<InspectionScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                 child: Text.rich(
                   TextSpan(
                     style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
