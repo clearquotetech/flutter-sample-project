@@ -16,6 +16,7 @@ class InitializeScreen extends StatefulWidget {
 class _InitializeScreenState extends State<InitializeScreen> {
   final _sdkKeyController = TextEditingController();
   bool _isInitializing = false;
+  String _sdkVersion = '';
 
   @override
   void initState() {
@@ -23,6 +24,17 @@ class _InitializeScreenState extends State<InitializeScreen> {
     SystemChrome.setPreferredOrientations(const [
       DeviceOrientation.portraitUp,
     ]);
+    _loadSDKVersion();
+  }
+
+  Future<void> _loadSDKVersion() async {
+    try {
+      final version = await ClearQuoteSDK.getSDKVersion();
+      if (!mounted) return;
+      setState(() => _sdkVersion = version);
+    } catch (_) {
+      // Leave version empty if unavailable.
+    }
   }
 
   @override
@@ -163,6 +175,20 @@ class _InitializeScreenState extends State<InitializeScreen> {
                         ),
                       ),
                     ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16),
+                child: Text(
+                  _sdkVersion.isEmpty
+                      ? 'SDK Version - …'
+                      : 'SDK Version - $_sdkVersion',
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 18,
+                    color: Color(0xFF666666),
                   ),
                 ),
               ),

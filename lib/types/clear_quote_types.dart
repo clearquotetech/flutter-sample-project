@@ -9,6 +9,7 @@ enum ClearQuoteMethod {
   getDealerCode,
   isSDKInitialized,
   manualOfflineSync,
+  sdkVersion,
 }
 
 class StartInspectionResult {

@@ -9,6 +9,7 @@ enum ClearQuoteMethod: String {
     case getDealerCode
     case isSDKInitialized
     case manualOfflineSync
+    case sdkVersion
 }
 
 final class ClearQuotePlugin: NSObject {
@@ -80,8 +81,15 @@ final class ClearQuotePlugin: NSObject {
         case .manualOfflineSync:
             ClearQuote.shared.initiateOfflineInspectionsSync()
             result(nil)
+
+        case .sdkVersion:
+            performOnMainThread {
+                result(ClearQuote.shared.getCurrentSDKVersion())
+            }
         }
     }
+
+    // MARK: - SDK Methods
     
     private func initSDK(key: String, result: @escaping FlutterResult) {
         DispatchQueue.main.async {
@@ -135,6 +143,8 @@ final class ClearQuotePlugin: NSObject {
             }
         }
     }
+
+    // MARK: - Helper methods
     
     private static func makeClientAttrs(from dictionary: [String: Any]?) -> CQSDKClientAttrs? {
         guard let dictionary else { return nil }

@@ -75,4 +75,9 @@ final class ClearQuoteSDK {
   static Future<void> manualOfflineSync() {
     return _methodChannel.invokeMethod<void>(ClearQuoteMethod.manualOfflineSync.name);
   }
+
+  static Future<String> getSDKVersion() async {
+    final result = await _methodChannel.invokeMethod<String>(ClearQuoteMethod.sdkVersion.name);
+    return result ?? '';
+  }
 }
