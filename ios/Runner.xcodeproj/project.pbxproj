@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -183,6 +183,7 @@
 				97C146EC1CF9000F007C117D /* Resources */,
 				9705A1C41CF9048500538489 /* Embed Frameworks */,
 				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
+				A4A47D16302DB2F70091A490 /* Fix TensorFlowLite Info.plists */,
 			);
 			buildRules = (
 			);
@@ -292,6 +293,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build";
+		};
+		A4A47D16302DB2F70091A490 /* Fix TensorFlowLite Info.plists */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Fix TensorFlowLite Info.plists";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# kewlbear/TensorFlowLiteC binary frameworks omit App Store-required Info.plist keys.\n# Patches SPM artifacts + embedded copies so validation (ITMS-90057 / ITMS-90530) succeeds.\nset -euo pipefail\n\nVERSION=\"1.0.0\"\nMIN_OS=\"${IPHONEOS_DEPLOYMENT_TARGET}\"\n\npatch_plist() {\n  plist=\"$1\"\n  if [ ! -f \"${plist}\" ]; then\n    return 0\n  fi\n\n  if /usr/libexec/PlistBuddy -c \"Print :CFBundleShortVersionString\" \"${plist}\" >/dev/null 2>&1; then\n    /usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString ${VERSION}\" \"${plist}\"\n  else\n    /usr/libexec/PlistBuddy -c \"Add :CFBundleShortVersionString string ${VERSION}\" \"${plist}\"\n  fi\n\n  if /usr/libexec/PlistBuddy -c \"Print :MinimumOSVersion\" \"${plist}\" >/dev/null 2>&1; then\n    /usr/libexec/PlistBuddy -c \"Set :MinimumOSVersion ${MIN_OS}\" \"${plist}\"\n  else\n    /usr/libexec/PlistBuddy -c \"Add :MinimumOSVersion string ${MIN_OS}\" \"${plist}\"\n  fi\n\n  echo \"Patched ${plist}\"\n}\n\n# 1) Patch SourcePackages artifacts so future embeds already have valid keys.\nDERIVED_DATA_ROOT=\"${BUILD_DIR%%/Build/*}\"\nARTIFACTS_ROOT=\"${DERIVED_DATA_ROOT}/SourcePackages/artifacts/tensorflowlitec\"\nif [ -d \"${ARTIFACTS_ROOT}\" ]; then\n  find \"${ARTIFACTS_ROOT}\" -path \"*/TensorFlowLiteC*.framework/Info.plist\" | while IFS= read -r plist; do\n    patch_plist \"${plist}\"\n  done\nelse\n  echo \"note: TensorFlowLiteC SPM artifacts not found at ${ARTIFACTS_ROOT}\"\nfi\n\n# 2) Patch (and re-sign) frameworks already embedded in the app bundle.\nFRAMEWORKS_DIR=\"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}\"\nif [ -d \"${FRAMEWORKS_DIR}\" ]; then\n  for name in TensorFlowLiteC TensorFlowLiteCMetal TensorFlowLiteCCoreML; do\n    fw=\"${FRAMEWORKS_DIR}/${name}.framework\"\n    patch_plist \"${fw}/Info.plist\"\n    if [ -d \"${fw}\" ] && [ -n \"${EXPANDED_CODE_SIGN_IDENTITY:-}\" ] && [ \"${EXPANDED_CODE_SIGN_IDENTITY}\" != \"-\" ] && [ \"${CODE_SIGNING_ALLOWED:-YES}\" != \"NO\" ]; then\n      /usr/bin/codesign --force --sign \"${EXPANDED_CODE_SIGN_IDENTITY}\" --preserve-metadata=identifier,entitlements,flags --timestamp=none \"${fw}\"\n    fi\n  done\nelse\n  echo \"note: Frameworks directory not found at ${FRAMEWORKS_DIR}; skipping embedded patch\"\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
