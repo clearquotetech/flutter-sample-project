@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24765" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24743"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_screen_icon" translatesAutoresizingMaskIntoConstraints="NO" id="dhd-7M-bNj">
+                                <rect key="frame" x="16" y="376" width="361" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="ua7-XY-JTj"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Pbw-le-GbH"/>
+                        <color key="backgroundColor" name="cq_sdk_primary_color"/>
+                        <constraints>
+                            <constraint firstItem="Pbw-le-GbH" firstAttribute="trailing" secondItem="dhd-7M-bNj" secondAttribute="trailing" constant="16" id="IfQ-CS-yOX"/>
+                            <constraint firstItem="dhd-7M-bNj" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="RaI-bA-G5N"/>
+                            <constraint firstItem="dhd-7M-bNj" firstAttribute="leading" secondItem="Pbw-le-GbH" secondAttribute="leading" constant="16" id="x4m-6g-JkY"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="80.916030534351137" y="264.08450704225356"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="splash_screen_icon" width="926" height="240"/>
+        <namedColor name="cq_sdk_primary_color">
+            <color red="0.16470588235294117" green="0.71372549019607845" blue="0.71372549019607845" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
