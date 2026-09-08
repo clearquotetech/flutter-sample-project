@@ -78,7 +78,7 @@ Already added to `ios/Runner.xcodeproj`:
 | Setting | Value |
 | --- | --- |
 | Repository | `https://github.com/clearquotetech/cq-ios-sdk.git` |
-| Requirement | Exact version `0.1.6-beta.4` |
+| Requirement | Revision `183de649` (`v0.1.6-beta.4`) |
 | Product linked on Runner | `ClearQuoteSDK` |
 
 Also linked on Runner for SDK runtime: `CoreML`, `MetalPerformanceShaders`, `Accelerate`.
