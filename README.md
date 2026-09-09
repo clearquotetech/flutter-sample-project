@@ -83,6 +83,10 @@ Already added to `ios/Runner.xcodeproj`:
 
 Also linked on Runner for SDK runtime: `CoreML`, `MetalPerformanceShaders`, `Accelerate`.
 
+ClearQuoteSDK depends on TensorFlow Lite (`kewlbear/TensorFlowLiteC`). Those binary frameworks omit App Store-required `Info.plist` keys (`CFBundleShortVersionString`, `MinimumOSVersion`). The Runner target includes a **Build Phases** run script named **Fix TensorFlowLite Info.plists** that patches SPM artifacts and the embedded `TensorFlowLiteC` / `TensorFlowLiteCMetal` / `TensorFlowLiteCCoreML` frameworks (and re-signs them) so archive validation does not fail with ITMS-90057 / ITMS-90530.
+
+If you copy this sample into another Flutter iOS app, add the same run script after **Embed Frameworks** (and after Flutter’s **Thin Binary** phase).
+
 ### Native bridge
 
 - `ios/Runner/ClearQuotePlugin.swift` — handles method/event channel calls and maps them to ClearQuoteSDK APIs
