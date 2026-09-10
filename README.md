@@ -78,7 +78,7 @@ Already added to `ios/Runner.xcodeproj`:
 | Setting | Value |
 | --- | --- |
 | Repository | `https://github.com/clearquotetech/cq-ios-sdk.git` |
-| Requirement | Revision `183de649` (`v0.1.6-beta.4`) |
+| Requirement | Branch `main` (resolved to `a983780` / **v0.1.6**) |
 | Product linked on Runner | `ClearQuoteSDK` |
 
 Also linked on Runner for SDK runtime: `CoreML`, `MetalPerformanceShaders`, `Accelerate`.
@@ -120,7 +120,7 @@ Not implemented yet.
 
 1. **Launch** — checks `isSDKInitialized`; opens Inspection if already initialized, otherwise Initialize.
 2. **Initialize** — enter SDK key → `initSDK` → on success (`code == 200`), navigate to Inspection.
-3. **Inspection** — optional client / customer / vehicle / quote fields, offline toggle, start inspection (normal or skip input), logout.
+3. **Inspection** — optional client / customer / vehicle / quote fields, offline toggle, start inspection (normal or skip input), manual offline sync, logout.
 4. **Completion** — inspection status events are shown via the event channel listener.
 
 ---
@@ -140,6 +140,8 @@ This sample exposes a subset of ClearQuoteSDK. Additional SDK methods can be wir
 | `logout` | `ClearQuoteSDK.logout()` | Clears SDK session |
 | `getDealerCode` | `ClearQuoteSDK.getDealerCode()` | Returns `String?` |
 | `isSDKInitialized` | `ClearQuoteSDK.isSDKInitialized()` | Returns `bool` |
+| `manualOfflineSync` | `ClearQuoteSDK.manualOfflineSync()` | Triggers `initiateOfflineInspectionsSync` |
+| `sdkVersion` | `ClearQuoteSDK.getSDKVersion()` | Returns `String` (`getCurrentSDKVersion`) |
 
 #### `startInspection` argument shapes
 
