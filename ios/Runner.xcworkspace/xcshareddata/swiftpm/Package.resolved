@@ -32,7 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/clearquotetech/cq-ios-sdk.git",
       "state" : {
-        "revision" : "183de6496269ce0d8bdce082fb34be8fd0e4586e"
+        "branch" : "main",
+        "revision" : "a983780656c4036d1f7f512f6d3960f860a50896"
       }
     },
     {
