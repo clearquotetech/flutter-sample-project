@@ -35,6 +35,7 @@ class _InspectionScreenState extends State<InspectionScreen> {
   final _regNumber = TextEditingController();
   final _make = TextEditingController();
   final _model = TextEditingController();
+  final _vin = TextEditingController();
   final _bodyStyle = TextEditingController();
   final _fuelType = TextEditingController();
   final _variant = TextEditingController();
@@ -96,6 +97,7 @@ class _InspectionScreenState extends State<InspectionScreen> {
       _regNumber,
       _make,
       _model,
+      _vin,
       _bodyStyle,
       _fuelType,
       _variant,
@@ -126,6 +128,7 @@ class _InspectionScreenState extends State<InspectionScreen> {
           'regNumber': _optionalTrim(_regNumber.text),
           'make': _optionalTrim(_make.text),
           'model': _optionalTrim(_model.text),
+          'vin': _optionalTrim(_vin.text),
           'bodyStyle': _optionalTrim(_bodyStyle.text),
           'fuelType': _optionalTrim(_fuelType.text),
           'variant': _optionalTrim(_variant.text),
@@ -311,6 +314,12 @@ class _InspectionScreenState extends State<InspectionScreen> {
               ),
               _Field(label: 'Make', controller: _make, placeholder: 'make'),
               _Field(label: 'Model', controller: _model, placeholder: 'model'),
+              _Field(
+                label: 'VIN',
+                controller: _vin,
+                placeholder: 'vin',
+                textCapitalization: TextCapitalization.characters,
+              ),
               _Field(
                 label: 'Body Style',
                 controller: _bodyStyle,
