@@ -179,6 +179,7 @@ final class ClearQuotePlugin: NSObject {
                 regNumber: Self.stringValue(from: $0, key: "regNumber"),
                 make: Self.stringValue(from: $0, key: "make"),
                 model: Self.stringValue(from: $0, key: "model"),
+                vin: Self.stringValue(from: $0, key: "vin"),
                 bodyStyle: Self.stringValue(from: $0, key: "bodyStyle"),
                 fuelType: Self.stringValue(from: $0, key: "fuelType"),
                 variant: Self.stringValue(from: $0, key: "variant")
